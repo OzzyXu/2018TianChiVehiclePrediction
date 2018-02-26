@@ -1,0 +1,27 @@
+01/28/2017
+Data cleansing:
+1. class_id:178529 has no level_id. All the other similar vehicles(displacement:1.1-1.2, price_level:5WL) has level_id:3, filled with 3;
+2. TR:5;4 -> TR:10, TR:8;7 -> TR:11;
+3. gearbox:AT;DCT -> gearbox:ATDCT, gearbox:MT;AT -> gearbox: MTAT;
+4. Delete two data for 175962 and one data for 961962. These data have double fuel system and special properties, relately small sale_quantity.
+5. Filled 527765's engine_torque with 0;
+6. gearbox_type: AMT: 1;
+            AT: 2;
+            ATDCT: 3;
+            CVT: 4;
+            DCT: 5;
+            MT: 6;
+            MTAT: 7;
+7. if_charging: T: 1;
+                L: 0.
+
+Anomaly:
+1. class_id:527765 TR:1, displacement:0. This is the only one. Make no change;
+2. TR:0 which corresponds to gearbox:CVT. Make no change;
+3. 265980, 270690, 516750, 560265, 621073, 736094, 883691, 948936: rated_passenger: -> 5;
+4. 576298: rated_passenger: -> 9 if car_length:5055, otherwise rated_passenger: -> 7;
+5. 739296: rated_passenger: -> 5 if car_length:4685, otherwise rated_passenger: -> 7;
+
+01/28/2017
+1. Transfer if_charging and gearbox_type back to str from numerical value; not sure 'fuel_type_id','newenergy_type_id','emission_standards_id','if_MPV_id', 'if_luxurious_id','cylinder_number','rated_passenger','compartment' should be taken as categorical values or numerical ones;
+2. Decompose 'sale_date' to 'year' and 'month' to see whether this can detrend the seasonal effects.
